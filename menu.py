@@ -1,30 +1,36 @@
 import time
-import pass_manager
-import db_manager
+import passmanager
+import DBManager
 import os
 
 def show_menu():
 
-    print("----------Welcome to the Menu!----------")
-    time.sleep(1)
+    print("----------WELCOME TO THE PASSWORD MANAGER MENU----------")
+    time.sleep(2)
     print("What would you like to do?")
-    print("1. Add a new password")
+    print("1. Create a new password?")
     print("2. Update/Remove a password")
     print("3. Retrieve a password")
     print("4. Display all passwords")
-    print("5. Exit")
+    print("5. Generate a password")
+    print("6. Check a passwords strength")
+    print("E. Exit")
     print("\n")
 
-def startup():
+    def startup():
 
-    if not os.path.exists('master.txt'):
-        pass_manager.first_time()
-        db_manager.create_table()
+        if not os.path.exists('master.txt'):
+            passmanager.first_time()
+            DBManager.create_table()
 
-    if pass_manager.check_master():
+
+
+
+
+    if passmanager.check_master():
         print("----------You're in!----------")
         time.sleep(0.5)
-        print("-"*30)
+        print("-" * 30)
         time.sleep(0.5)
 
         while True:
@@ -33,19 +39,18 @@ def startup():
             choice = input("Please enter your choice: ")
             print("\n")
             if choice == "1":
-                pass_manager.add_password()
+                passmanager.addpassword()
             elif choice == "2":
-                pass_manager.update_password()
+                passmanager.update_password()
             elif choice == "3":
-                pass_manager.retrieve_password()
+                passmanager.retrieve_password()
             elif choice == "4":
-                pass_manager.display_all()
+                passmanager.display_all()
             elif choice == "5":
-                db_manager.close_db()
+                DBManager.close_db()
                 break
 
     else:
         print("Your master password is not correct. Try Again. ")
-
-if __name__ == '__main__':
-    startup()
+        if __name__ == '__main__':
+            startup()
